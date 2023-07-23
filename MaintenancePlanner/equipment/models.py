@@ -21,7 +21,7 @@ CURRENCY_CHOICES = [
 
 class Equipment(models.Model):
     description = models.CharField(
-        max_length=30,
+        max_length=50,
         validators=[equipment_name_validator],
     )
     type = models.CharField(
