@@ -10,8 +10,8 @@ class ServiceHistoryForm(forms.ModelForm):
 
         widgets = {
             'equipment': forms.Select(attrs={'class': 'form-control'}),
-            'problem_description': forms.Textarea(attrs={'class': 'form-control'}),
-            'solution': forms.Textarea(attrs={'class': 'form-control'}),
+            'problem_description': forms.Textarea(attrs={'class': 'form-control', 'rows': 6}),
+            'solution': forms.Textarea(attrs={'class': 'form-control', 'rows': 6}),
         }
 
 
@@ -21,6 +21,6 @@ class ServiceHistoryUpdateForm(forms.ModelForm):
         exclude = ('equipment', 'created_on', 'technician')
 
         widgets = {
-            'problem_description': forms.Textarea(attrs={'class': 'form-control'}),
-            'solution': forms.Textarea(attrs={'class': 'form-control'}),
+            'problem_description': forms.Textarea(attrs={'class': 'form-control', 'rows': 7}),
+            'solution': forms.Textarea(attrs={'class': 'form-control', 'rows': 7}),
         }

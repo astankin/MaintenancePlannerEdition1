@@ -40,4 +40,7 @@ class ReportEditView(LoginRequiredMixin, UpdateView):
     model = ServiceHistory
     template_name = 'edit-report.html'
     form_class = ServiceHistoryUpdateForm
-    success_url = reverse_lazy('equipment-list')
+
+    def get_success_url(self):
+        equipment_id = self.object.equipment.id
+        return reverse_lazy('service-history', kwargs={'pk': equipment_id})

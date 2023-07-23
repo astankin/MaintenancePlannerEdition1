@@ -16,6 +16,7 @@ class EquipmentListView(LoginRequiredMixin, ListView):
     model = Equipment
     context_object_name = 'equipment'
     template_name = 'equipment_list.html'
+    paginate_by = 7
 
 
 @login_required()

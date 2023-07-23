@@ -31,7 +31,7 @@ class PlantDeleteView(LoginRequiredMixin, AllowedUsersMixin, DeleteView):
 
 
 class PlantListView(LoginRequiredMixin, AllowedUsersMixin, ListView):
-    allowed_roles = ['MANAGER']
+    allowed_roles = ['MANAGER', 'SUPERVISOR']
     model = Plant
     template_name = 'plant/plant-list.html'
     context_object_name = 'plants'

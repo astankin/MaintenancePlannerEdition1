@@ -19,7 +19,7 @@
                     <p class="card-text">
                     <div class="table-responsive">
                         <table class="table table-hover">
-                            <thead>
+                            <thead class="text-center">
                             <tr>
                                 <th scope="col">Equipment</th>
                                 <th scope="col">Task Title</th>
@@ -29,7 +29,7 @@
                                 <th scope="col">Status</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="text-center">
                             {% for task in  tasks %}
                                 <tr>
                                     <td>
@@ -46,8 +46,9 @@
                                     <td>{{ task.created_on }}</td>
                                     <td>
                                         {% if not task.complete %}
-                                            <a class="btn btn-success" href="{% url 'complete-task' task.id %}">
-                                            Complete
+                                            <a class="btn btn-primary" href="{% url 'complete-task' task.id %}">
+                                            <i class="fa-solid fa-check"></i>
+{#                                            Complete#}
                                         </a>
                                         {% endif %}
                                     </td>

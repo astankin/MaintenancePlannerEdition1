@@ -13,9 +13,6 @@
                 <a href="{% url 'create-plant' %}" class="list-group-item list-group-item-action py-2 ripple">
                     <i class="fa-solid fa-square-plus fa-lg me-2"></i><span>Create Plant</span>
                 </a>
-                <a href="{% url 'plants-list' %}" class="list-group-item list-group-item-action py-2 ripple">
-                    <i class="fa-solid fa-industry me-2"></i><span>Plants</span>
-                </a>
             {% elif request.user.role == 'OPERATOR' %}
                 <a href="{% url 'user-task-list' %}" class="list-group-item list-group-item-action py-2 ripple"
                    aria-current="true">
@@ -23,13 +20,17 @@
                 </a>
             {% endif %}
             {% if request.user.role == 'MANAGER' or request.user.role == 'SUPERVISOR' %}
+                <a href="{% url 'plants-list' %}" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fa-solid fa-industry me-2"></i><span>Plants</span>
+                </a>
                 <a href="{% url 'department-list' %}" class="list-group-item list-group-item-action py-2 ripple">
                     <i class="fa-solid fa-building me-2"></i><span>Departments</span>
                 </a>
                 <a href="{% url 'create-equipment' %}" class="list-group-item list-group-item-action py-2 ripple">
                     <i class="fa-solid fa-gears me-2"></i><span>Create equipment</span>
                 </a>
-                <a href="{% url 'create-maintenance-plan' %}" class="list-group-item list-group-item-action py-2 ripple">
+                <a href="{% url 'create-maintenance-plan' %}"
+                   class="list-group-item list-group-item-action py-2 ripple">
                     <i class="fa-solid fa-list-check fa-lg me-2"></i><span>Create Maintenance Plan</span>
                 </a>
             {% endif %}
@@ -47,12 +48,12 @@
             <a href="{% url 'create-service-report' %}" class="list-group-item list-group-item-action py-2 ripple">
                 <i class="fa-solid fa-wrench la-lg me-2"></i><span>Create Service Report</span>
             </a>
-            <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                <i class="fa-solid fa-ruler me-2"></i><span>Measuring tools</span>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                <i class="fa-solid fa-screwdriver-wrench me-2"></i><span>Hand tools</span>
-            </a>
+{#            <a href="#" class="list-group-item list-group-item-action py-2 ripple">#}
+{#                <i class="fa-solid fa-ruler me-2"></i><span>Measuring tools</span>#}
+{#            </a>#}
+{#            <a href="#" class="list-group-item list-group-item-action py-2 ripple">#}
+{#                <i class="fa-solid fa-screwdriver-wrench me-2"></i><span>Hand tools</span>#}
+{#            </a>#}
         </div>
     </div>
 </nav>
