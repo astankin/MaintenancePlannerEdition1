@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView
 
 from MaintenancePlanner.equipment.models import Equipment
-from MaintenancePlanner.service_history.forms import ServiceHistoryForm
+from MaintenancePlanner.service_history.forms import ServiceHistoryForm, ServiceHistoryUpdateForm
 from MaintenancePlanner.service_history.models import ServiceHistory
 
 
@@ -39,5 +39,5 @@ class ReportDetailView(LoginRequiredMixin, DetailView):
 class ReportEditView(LoginRequiredMixin, UpdateView):
     model = ServiceHistory
     template_name = 'edit-report.html'
-    fields = '__all__'
+    form_class = ServiceHistoryUpdateForm
     success_url = reverse_lazy('equipment-list')
