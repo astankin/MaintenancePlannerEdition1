@@ -2,10 +2,9 @@ services:
   web:
     image: maintenance_planner
     build: .
-    command: gunicorn --bind=0.0.0.0:8000 maintenance_planner.wsgi:application
+    command: gunicorn --bind=0.0.0.0:8000 MaintenancePlanner.wsgi:application
     volumes:
-      - /tm/app-resources/static:/app/static
-    platform: linux/64
+      - /tmp/MaintenancePlanner/static:/app/static
     ports:
       - "8000:8000"
     env_file:
@@ -18,11 +17,25 @@ services:
     image: postgres
     restart: always
     ports:
-      - "5433:5433"
+      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: root
-      POSTGRES_USER: postgres
+      POSTGRES_USER: root
       POSTGRES_DB: maintenance_planner_db
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
-        - ./postgresql:/var/lib/postgresql/data
+      - ./postgresql:/var/lib/postgresql/data
+
+  nginx:
+    image: nginx
+    ports:
+      - "81:80"
+      - "443:443"
+    volumes:
+      - /tmp/for_deploy/static:/home/app/web/staticfiles
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/logs:/var/log/nginx
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
+    links:
+      - web
