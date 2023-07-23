@@ -1,105 +1,110 @@
 <!--If there are equipment -->
 {% if equipment %}
     <div class="card bg-light ms-1 me-4 mb-4 mt-0">
-        <div class="card-header">
-            <i class="fa-solid fa-list fa-lg me-2"></i>List of Equipment
-        </div>
-        <div class="card-body">
-            <p class="card-text">
-            <div class="table-responsive">
-                <table class="table table-hover ">
-                    <thead class="text-center">
-                    <tr>
-                        <th scope="col">Number</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Department</th>
-                        <th scope="col"></th>
-                        <th scope="col">Actions</th>
+    <div class="card-header">
+        <i class="fa-solid fa-list fa-lg me-2"></i>List of Equipment
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+        <div class="table-responsive">
+            <table class="table table-hover ">
+                <thead class="text-center">
+                <tr>
+                    <th scope="col">Number</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Department</th>
+                    <th scope="col"></th>
+                    <th scope="col">Actions</th>
 
-                    </tr>
-                    </thead>
-                    <tbody class="text-center">
-                    {% for eq in  equipment %}
-                        <tr>
-                            <td>{{ eq.id }}</td>
-                            <td>{{ eq.description }}</td>
-                            <td>{{ eq.type }}</td>
-                            <td>{{ eq.department }}</td>
-                            <td>
-                                <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-                                   href="{% url 'service-history' eq.id %}">
-                                    Service History
+                </tr>
+                </thead>
+                <tbody class="text-center">
+                {% for eq in  equipment %}
+                    <tr>
+                        <td>{{ eq.id }}</td>
+                        <td>{{ eq.description }}</td>
+                        <td>{{ eq.type }}</td>
+                        <td>{{ eq.department }}</td>
+                        <td>
+                            <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                               href="{% url 'service-history' eq.id %}">
+                                Service History
+                            </a>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success me-1"
+                                    href="{% url 'view-equipment' eq.id %}" data-bs-toggle="modal"
+                                    data-bs-target="#myModal{{ eq.id }}">
+                                <i class="fa-solid fa-circle-info fa-lg"></i>
+                            </button>
+
+                            <!-- Modal - View Equipment -->
+                            {% include 'partials/modal-info.html' %}
+
+                            {% if request.user.role == 'MANAGER' or request.user.role == 'SUPERVISOR' %}
+                                <a class="btn btn-warning" href="{% url 'edit-equipment' eq.id %}">
+                                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
                                 </a>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-success me-1"
-                                        href="{% url 'view-equipment' eq.id %}" data-bs-toggle="modal"
-                                        data-bs-target="#myModal{{ eq.id }}">
-                                    <i class="fa-solid fa-circle-info fa-lg"></i>
+
+                                <button type="button" class="btn btn-danger me-1"
+                                        href="{% url 'delete-equipment' eq.id %}"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#myModal2{{ eq.id }}">
+                                    <i class="fa-solid fa-trash-can fa-lg"></i>
                                 </button>
 
-                                <!-- Modal - View Equipment -->
-                                {% include 'partials/modal-info.html' %}
+                                <!-- Modal - Delete Equipment -->
+                                {% include 'partials/modal-delete.html' %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div>
+                <div class='d-flex justify-content-between'>
 
-                                {% if request.user.role == 'MANAGER' or request.user.role == 'SUPERVISOR' %}
-                                    <a class="btn btn-warning" href="{% url 'edit-equipment' eq.id %}">
-                                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                                    </a>
-
-                                    <button type="button" class="btn btn-danger me-1"
-                                            href="{% url 'delete-equipment' eq.id %}"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#myModal2{{ eq.id }}">
-                                        <i class="fa-solid fa-trash-can fa-lg"></i>
-                                    </button>
-
-                                    <!-- Modal - Delete Equipment -->
-                                    {% include 'partials/modal-delete.html' %}
-                                {% endif %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                <div >
-                <div class='d-flex justify-content-between' >
                     <div>
                         {% if request.user.role == 'MANAGER' or request.user.role == 'SUPERVISOR' %}
                             <a class="link-primary text-decoration-none" href="{% url 'create-equipment' %}">
                                 <i class="fa-solid fa-plus fa-lg me-2"></i>
                                 Create Equipment
                             </a>
-                            </div>
-
-                            <div>
-                            {% if is_paginated %}
+                        {% endif %}
+                    </div>
+                    <div>
+                        {% if is_paginated %}
+                            <ul class="pagination pagination-sm">
                                 {% if page_obj.has_previous %}
-                                    <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
-                                    <a class="btn btn-outline-info mb-4"
-                                       href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                           href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                                    </li>
                                 {% endif %}
-
                                 {% for num in page_obj.paginator.page_range %}
                                     {% if page_obj.number == num %}
-                                        <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                                        <li class="page-item active">
+                                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                        </li>
                                     {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                                        <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                        </li>
                                     {% endif %}
                                 {% endfor %}
                                 {% if page_obj.has_next %}
-                                    <a class="btn btn-outline-info mb-4"
-                                       href="?page={{ page_obj.next_page_number }}">Next</a>
-                                    <a class="btn btn-outline-info mb-4"
-                                       href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                                    </li>
                                 {% endif %}
-                            {% endif %}
-
+                            </ul>
                         {% endif %}
-                        </div>
+                    </div>
+
+
                 </div>
             </div>
-            </p>
         </div>
     </div>
 {% else %}
