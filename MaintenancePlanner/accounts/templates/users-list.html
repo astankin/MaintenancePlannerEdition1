@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+        <div class="card bg-light ms-1 me-4 mb-4 mt-0">
+            <div class="card-header">
+                <i class="fa-solid fa-list fa-lg me-2"></i>Users
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">User ID</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in  users %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.first_name }}</td>
+                                <td>{{ user.last_name }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.role }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-success me-1"
+                                            href="#" data-bs-toggle="modal"
+                                            data-bs-target="#myModal{{ user.id }}">
+                                        <i class="fa-solid fa-circle-info fa-lg"></i>
+                                    </button>
+
+                                    <!-- Modal - View Profile -->
+                                    {% include 'partials/modal-profile-info.html' %}
+
+                                    <button type="button" class="btn btn-danger me-1"
+                                            href="#"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#myModal2{{ user.id }}">
+                                        <i class="fa-solid fa-trash-can fa-lg"></i>
+                                    </button>
+
+                                    <!-- Modal - View Delete Profile -->
+                                    {% include 'partials/modal-delete-user.html' %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

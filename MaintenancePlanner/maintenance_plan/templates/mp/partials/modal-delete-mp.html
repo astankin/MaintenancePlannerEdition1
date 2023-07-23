@@ -1,0 +1,31 @@
+<div class="modal" id="myModal3{{ mp.id }}" tabindex="-1"
+     aria-labelledby="myModalLabel3" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fa-solid fa-trash-can fa-lg me-2"></i>
+                <h5 class="modal-title"> Delete Maintenance Plan</h5>
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>You have selected to delete this maintenance plan.</p>
+                <p>{{ mp.name }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success"
+                        data-bs-dismiss="modal">Close
+                </button>
+                <form action="{% url 'mp-delete' mp.id %}"
+                      method="post">
+                    {% csrf_token %}
+                    <!-- Confirm Button -->
+                    <button class="btn btn-danger" type="submit">Delete
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

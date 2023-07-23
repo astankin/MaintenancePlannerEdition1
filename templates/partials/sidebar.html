@@ -1,0 +1,61 @@
+<!-- Sidebar -->
+<nav id="sidebarMenu" class="collapse d-lg-block sidebar card bg-light ms-2 me-2 mb-2 mt-0">
+    <div class="position-sticky">
+        <div class="list-group list-group-flush mx-0 mt-0">
+            {% if request.user.role == 'MANAGER' %}
+                <a class="list-group-item list-group-item-action py-2 ripple" href="{% url 'register' %}">
+                    <i class="fa-solid fa-user-plus fa-lg me-2"></i>
+                    Create User
+                </a>
+                <a href="{% url 'users-list' %}" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-users fa-fw me-3"></i><span>Users</span>
+                </a>
+                <a href="{% url 'create-plant' %}" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fa-solid fa-square-plus fa-lg me-2"></i><span>Create Plant</span>
+                </a>
+                <a href="{% url 'plants-list' %}" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fa-solid fa-industry me-2"></i><span>Plants</span>
+                </a>
+            {% elif request.user.role == 'OPERATOR' %}
+                <a href="{% url 'user-task-list' %}" class="list-group-item list-group-item-action py-2 ripple"
+                   aria-current="true">
+                    <i class="fas fa-tachometer-alt fa-fw me-2"></i><span>My Tasks</span>
+                </a>
+            {% endif %}
+            {% if request.user.role == 'MANAGER' or request.user.role == 'SUPERVISOR' %}
+                <a href="{% url 'department-list' %}" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fa-solid fa-building me-2"></i><span>Departments</span>
+                </a>
+                <a href="{% url 'create-equipment' %}" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fa-solid fa-gears me-2"></i><span>Create equipment</span>
+                </a>
+                <a href="{% url 'create-maintenance-plan' %}" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fa-solid fa-list-check fa-lg me-2"></i><span>Create Maintenance Plan</span>
+                </a>
+            {% endif %}
+            <a href="{% url 'equipment-list' %}" class="list-group-item list-group-item-action py-2 ripple">
+                <i class="fa-solid fa-list fa-fw me-2"></i><span>List of equipment</span>
+            </a>
+            {% if request.user.role == 'MANAGER' or request.user.role == 'SUPERVISOR' %}
+                <a href="{% url 'all-tasks' %}" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fa-solid fa-clipboard-list fa-lg me-2"></i><span>Task List</span>
+                </a>
+            {% endif %}
+            <a href="{% url 'advanced-search-equipment' %}" class="list-group-item list-group-item-action py-2 ripple">
+                <i class="fa-solid fa-magnifying-glass fa-lg me-2"></i><span>Search equipment</span>
+            </a>
+            <a href="{% url 'create-service-report' %}" class="list-group-item list-group-item-action py-2 ripple">
+                <i class="fa-solid fa-wrench la-lg me-2"></i><span>Create Service Report</span>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                <i class="fa-solid fa-ruler me-2"></i><span>Measuring tools</span>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                <i class="fa-solid fa-screwdriver-wrench me-2"></i><span>Hand tools</span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+
+<!-- Sidebar -->

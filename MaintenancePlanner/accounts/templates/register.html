@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <div class="card bg-light mb-3" style="max-width: 400rem;">
+                <div class="card-header">
+                    <i class="fa-solid fa-address-card fa-lg"></i> User Registration
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary ">Add</button>
+                            <a href="{% url 'home-page' %}" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

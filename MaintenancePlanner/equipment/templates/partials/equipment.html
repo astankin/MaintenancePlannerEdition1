@@ -1,0 +1,83 @@
+<!--If there are equipment -->
+        {% if equipment %}
+            <div class="card bg-light ms-1 me-4 mb-4 mt-0">
+                <div class="card-header">
+                    <i class="fa-solid fa-list fa-lg me-2"></i>List of Equipment
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                    <div class="table-responsive">
+                        <table class="table table-hover ">
+                            <thead class="text-center">
+                            <tr>
+                                <th scope="col">Number</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Department</th>
+                                <th scope="col"></th>
+                                <th scope="col">Actions</th>
+
+                            </tr>
+                            </thead>
+                            <tbody class="text-center">
+                            {% for eq in  equipment %}
+                                <tr>
+                                    <td>{{ eq.id }}</td>
+                                    <td>{{ eq.description }}</td>
+                                    <td>{{ eq.type }}</td>
+                                    <td>{{ eq.department }}</td>
+                                    <td>
+                                        <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                                           href="{% url 'service-history' eq.id %}">
+                                            Service History
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-success me-1"
+                                                href="{% url 'view-equipment' eq.id %}" data-bs-toggle="modal"
+                                                data-bs-target="#myModal{{ eq.id }}">
+                                            <i class="fa-solid fa-circle-info fa-lg"></i>
+                                        </button>
+
+                                        <!-- Modal - View Equipment -->
+                                        {% include 'partials/modal-info.html' %}
+
+                                        {% if request.user.role == 'MANAGER' or request.user.role == 'SUPERVISOR' %}
+                                            <a class="btn btn-warning" href="{% url 'edit-equipment' eq.id %}">
+                                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                            </a>
+
+                                            <button type="button" class="btn btn-danger me-1"
+                                                    href="{% url 'delete-equipment' eq.id %}"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#myModal2{{ eq.id }}">
+                                                <i class="fa-solid fa-trash-can fa-lg"></i>
+                                            </button>
+
+                                            <!-- Modal - Delete Equipment -->
+                                            {% include 'partials/modal-delete.html' %}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {% if request.user.role == 'MANAGER' or request.user.role == 'SUPERVISOR' %}
+                            <a class="link-primary text-decoration-none" href="{% url 'create-equipment' %}">
+                                <i class="fa-solid fa-plus fa-lg me-2"></i>
+                                Create Equipment
+                            </a>
+                        {% endif %}
+                    </div>
+                    </p>
+                </div>
+            </div>
+        {% else %}
+            <!-- If no any equipment in the record -->
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <h5 class="alert alert-primary ms-4 me-4">No Equipment Records</h5>
+                </div>
+            </div>
+
+        {% endif %}

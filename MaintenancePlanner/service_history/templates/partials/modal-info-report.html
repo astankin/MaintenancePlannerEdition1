@@ -1,0 +1,58 @@
+<div class="modal" id="myModal{{ report.id }}" tabindex="-1"
+     aria-labelledby="myModalLabel1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fa-solid fa-clipboard-list fa-lg me-2"></i>
+                    Report
+                </h5>
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-hover table-borderless">
+                     <tr>
+                        <td>
+                            <strong>Created on: </strong>
+                        </td>
+                        <td>
+                            {{ report.created_on }}
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>
+                            <strong>Done by: </strong>
+                        </td>
+                        <td>
+                            {{ report.technician }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Problem Description:</strong></td>
+                        <td>
+                            {{ report.problem_description }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Solution:</strong>
+                        </td>
+                        <td>
+                            {{ report.solution }}
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

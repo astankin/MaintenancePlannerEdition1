@@ -1,0 +1,27 @@
+services:
+  web:
+    image: maintenance_planner
+    build: .
+    command: python manage.py runserver 0.0.0:8000
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    links:
+      - postgres
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+      POSTGRES_DB: maintenance_planner_db
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+        - ./postgresql:/var/lib/postgresql/data

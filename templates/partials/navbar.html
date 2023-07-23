@@ -1,0 +1,70 @@
+{% load static %}
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-light fixed-top" data-bs-theme="light">
+    <div class="container-fluid">
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-mdb-toggle="collapse"
+                data-mdb-target="#sidebarMenu"
+                aria-controls="sidebarMenu"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <a class="navbar-brand" href="{% url 'home-page' %}">
+            <ul class="navbar-nav ms-auto d-flex flex-row">
+                <li><img class="logo me-2" src="{% static 'img/logo.png' %}" alt="logo" height="30"></li>
+                <li><h2 style="color: #5a6268; font-weight: bold">MP</h2></li>
+            </ul>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <!-- Search form -->
+            {% if user.is_authenticated %}
+                <form class="d-flex" method=POST action="{% url 'search-equipment' %}">
+                    {% csrf_token %}
+                    <input class="form-control me-sm-2" type="search" placeholder="Equipment Number"
+                           name="number">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i
+                            class="fa-solid fa-magnifying-glass fa-lg"></i></button>
+                </form>
+            {% endif %}
+            <!-- Right links -->
+            <ul class="navbar-nav ms-auto d-flex flex-row">
+                <!-- If user is not logged in -->
+                {% if not request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}"><i
+                                class="fa-solid fa-right-to-bracket fa-lg me-2"></i>Sig In
+                        </a>
+                    </li>
+                {% else %}
+                    <!-- Avatar -->
+                    <li class="nav-item dropdown d-flex align-items-center">
+                        <div class="btn-group dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                               aria-haspopup="true" aria-expanded="false">
+                                {% if user.profile.image %}
+                                    <img src="{{ user.profile.image.url }}" class="rounded-circle" height="40"
+                                         loading="lazy"/>
+                                {% else %}
+                                    <img src="{% static 'img/profile-img.png' %}" class="rounded-circle" height="40"
+                                         loading="lazy"/>
+                                {% endif %}
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a>
+                                <a class="dropdown-item" href="{% url 'profile-update' %}">Settings</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+                            </div>
+                        </div>
+                        <h6 style="color: #5a6268">{{ request.user.role }}</h6>
+                    </li>
+                {% endif %}
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<!-- Navbar -->

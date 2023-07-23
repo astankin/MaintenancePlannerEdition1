@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+        <div class="card bg-light ms-1 me-4 mb-4 mt-0">
+            <div class="card-header">
+                <i class="fa-solid fa-list-check fa-lg me-2"></i>{{ mp.name }}
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for operation in operations %}
+                            <tr>
+                                <td>{{ operation.title }}</td>
+                                <td>{{ operation.description|truncatechars:50 }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-success me-1"
+                                            href="{% url 'operation-details' operation.id %}" data-bs-toggle="modal"
+                                            data-bs-target="#myModal{{ operation.id }}">
+                                        <i class="fa-solid fa-circle-info fa-lg"></i>
+                                    </button>
+
+                                    <!-- Modal - View Operation -->
+                                    {% include 'operation/operation-details.html' %}
+                                    {% if request.user.role == 'MANAGER' or request.user.role == 'SUPERVISOR' %}
+                                        <a class="btn btn-warning" href="{% url 'operation-update' operation.id %}">
+                                            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                        </a>
+
+
+                                        <button type="button" class="btn btn-danger me-1"
+                                                href="#"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#myModal2{{ operation.id }}">
+                                            <i class="fa-solid fa-trash-can fa-lg"></i>
+                                        </button>
+
+                                        <!-- Modal - Delete Operation -->
+                                        {% include 'mp/../operation/partials/modal-delete-operation.html' %}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% if request.user.role == 'MANAGER' or request.user.role == 'SUPERVISOR' %}
+                        <div class="d-flex justify-content-between">
+                            <a class="link-primary text-decoration-none" href="{% url 'create-operation' mp.id %}">
+                                <i class="fa-solid fa-plus fa-lg me-2"></i>
+                                Add Operation
+                            </a>
+                            <button type="button" class="btn btn-danger me-1"
+                                    href="#"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#myModal3{{ mp.id }}">
+                                <i class="fa-solid fa-trash-can fa-lg"></i>
+                                Delete MP
+                            </button>
+                            <!-- Modal - Delete Maintenance Plan -->
+                            {% include 'mp/partials/modal-delete-mp.html' %}
+
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+{% endblock %}

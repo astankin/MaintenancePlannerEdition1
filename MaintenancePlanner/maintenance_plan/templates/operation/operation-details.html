@@ -1,0 +1,50 @@
+<div class="modal" id="myModal{{ operation.id }}" tabindex="-1"
+     aria-labelledby="myModalLabel1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <p>
+                        <i class="fa-solid fa-circle-info fa-lg me-2"></i>
+                        Operation Description:
+                    </p>
+                </h5>
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-hover table-borderless">
+                    <tr>
+                        <td>
+                            <strong>Title: </strong>
+                        </td>
+                        <td>
+                            {{ operation.title }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Description: </strong>
+                        </td>
+                        <td>
+                            {{ operation.description }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                {% if request.user.role == 'MANAGER' or request.user.role == 'SUPERVISOR' %}
+                    <a type="button" class="btn btn-primary"
+                       href="{% url 'create-task' operation.id %}">Create Task
+                    </a>
+                {% endif %}
+                <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Close
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

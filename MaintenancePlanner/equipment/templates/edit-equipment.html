@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+        <div class="row justify-content-center">
+            <div class="col-7">
+                <div class="card bg-light mb-3" style="max-width: 200rem;">
+                  <div class="card-header">
+                      <i class="fa-regular fa-pen-to-square fa-lg me-2"></i>Edit Equipment
+                  </div>
+                  <div class="card-body">
+                      <form  method="POST" >
+                          {% csrf_token %}
+                          {{ form.as_p }}
+                          <button type="submit" class="btn btn-primary">Edit</button>
+                          <a href="{% url 'equipment-list' %}" class="btn btn-secondary">Cancel</a>
+                      </form>
+                  </div>
+            </div>
+            </div>
+        </div>
+{% endblock %}

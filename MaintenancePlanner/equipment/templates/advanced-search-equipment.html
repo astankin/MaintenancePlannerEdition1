@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-12 ">
+            <div class="bg-light ms-1 me-4  mt-0">
+                <div class="row justify-content-center">
+                    <div class="col">
+                        <div class="card bg-light mb-3" style="max-width: 200rem;">
+                            <div class="card-header">
+                                <i class="fa-solid fa-magnifying-glass fa-lg me-2"></i> Advanced Search
+                            </div>
+                            <div class="card-body">
+                                <form method="GET">
+                                    {% csrf_token %}
+                                    <table class="table table-responsive table-borderless">
+                                        {% for field in eq_filter.form %}
+                                            {% if forloop.counter0|divisibleby:6 %}
+                                                <tr>
+                                            {% endif %}
+                                        <td>
+                                            {{ field.label_tag }}
+                                            {{ field }}
+                                        </td>
+                                        {% if forloop.counter|divisibleby:6 or forloop.last %}
+                                            </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </table>
+                                    <button type="submit" class="btn btn-primary">Search</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% include 'partials/equipment.html' %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if reports %}
+        <div class="card bg-light ms-1 me-4 mb-4 mt-0">
+            <div class="card-header">
+                <i class="fa-solid fa-screwdriver-wrench fa-lg me-2"></i>
+                <strong>Service history for equipment {{ equipment }}</strong>
+
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Equipment</th>
+                            <th scope="col">Created on</th>
+                            <th scope="col">Problem description</th>
+                            <th scope="col">Done by</th>
+                            <th scope="col">Actions</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for report in  reports %}
+                            <tr>
+                            <td>
+                                {{ report.equipment }}
+
+                            </td>
+                            <td>
+                                {{ report.created_on }}
+
+                            </td>
+                            <td>
+                                {{ report.problem_description|truncatechars:50 }}
+                            </td>
+                            <td>{{ report.technician }}</td>
+                            <td>
+                                <button type="button" class="btn btn-success me-1"
+                                        href="#" data-bs-toggle="modal"
+                                        data-bs-target="#myModal{{ report.id }}">
+                                    <i class="fa-solid fa-circle-info fa-lg"></i>
+                                </button>
+
+                                <!-- Modal - View Equipment -->
+                                {% include 'partials/modal-info-report.html' %}
+
+
+                                <a class="btn btn-warning" href="{% url 'update-report' report.id %}">
+                                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                </a>
+                            </td>
+
+
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                </p>
+            </div>
+        </div>
+    {% else %}
+        <!-- If no any task in the record -->
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <h5 class="alert alert-primary ms-4 me-4">No service history in the record </h5>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

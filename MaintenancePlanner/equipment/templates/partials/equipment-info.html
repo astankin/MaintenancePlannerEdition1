@@ -1,0 +1,98 @@
+<table class="table table-hover table-borderless">
+    <tr>
+        <td>
+            <strong>Type:</strong></td>
+        <td>
+            {{ eq.type }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>Manufacturer:</strong>
+        </td>
+        <td>
+            {{ eq.manufacturer|default_if_none:'No data' }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>Model Number:</strong>
+        </td>
+        <td>
+            {{ eq.model_number|default_if_none:'No data' }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>Year of Manufacture:</strong>
+        </td>
+        <td>
+            {{ eq.year_of_manufacture|default_if_none:'No data' }}
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            <strong>Serial Number:</strong>
+        </td>
+        <td>
+            {{ eq.serial_number|default_if_none:'No data' }}
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <strong>Part Number:</strong>
+        </td>
+        <td>
+            {{ eq.part_number|default_if_none:'No data' }}
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            <strong>Department:</strong>
+        </td>
+        <td>
+            {{ eq.department }}
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            <strong>Acquisition Date:</strong>
+        </td>
+        <td>
+            {{ eq.acquisition_date|default_if_none:'No data' }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>Acquisition Value:</strong>
+        </td>
+        <td>
+            {% if eq.acquisition_value %}
+                {{ eq.acquisition_value|floatformat:2 }} {{ eq.currency_code }}
+                {% else %}
+                No data
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>Maintenance Plan:</strong>
+        </td>
+        <td>
+            {% if eq.maintenanceplanmodel %}
+                <strong><a
+                        href="{% url 'mp-details' eq.maintenanceplanmodel.id %}">{{ eq.maintenanceplanmodel }}</a></strong>
+            {% else %}
+                <p>No Maintenance Plan</p>
+                {% if request.user.role == 'MANAGER' or request.user.role == 'SUPERVISOR' %}
+                <a class="link-primary" href="{% url 'create-mp' eq.id %}">Create Maintenance Plan</a>
+                {% endif %}
+            {% endif %}
+
+        </td>
+    </tr>
+</table>

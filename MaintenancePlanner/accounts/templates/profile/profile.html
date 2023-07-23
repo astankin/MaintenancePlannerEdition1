@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+      <div class="row justify-content-center mt-3 text-center">
+            <div class="col-3">
+                <div class="card bg-light mb-3" style="max-width: 200rem;">
+                  <div class="card-header">
+                      <h4>@{{ user.username }}</h4>
+                      <div>
+                        <img src="{{ user.profile.image.url }}" height="100" loading="lazy"/>
+                   </div>
+                  </div>
+                  <div class="card-body">
+                      <h4 class="card-title">{{ user.full_name }}</h4>
+                        <p class="card-text">{{ user.email }}</p>
+                        <a class="link-primary link-offset-2 link-underline-opacity-25" href="{% url 'profile-update' %}">Edit Profile</a>
+                  </div>
+            </div>
+            </div>
+        </div>
+{% endblock content %}

@@ -1,0 +1,49 @@
+<div class="modal" id="myModal{{ user.id }}" tabindex="-1"
+     aria-labelledby="myModalLabel1" aria-hidden="true" style="border-radius: 15px;">
+    <div class="modal-dialog" role="document" >
+        <div class="modal-content ">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa-regular fa-address-card fa-lg me-2"></i> User info
+                </div>
+                <div class="card-body p-4">
+                    <div class="d-flex text-black">
+                        <div class="flex-shrink-0">
+                            <img src="{{ user.profile.image.url }}"
+                                 alt="Generic placeholder image" class="img-fluid"
+                                 style="height: 160px; border-radius: 10px;">
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <table class="table table-hover table-borderless">
+                                <tr>
+                                    <td><strong>Name:</strong></td>
+                                    <td>{{ user.full_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Username:</strong></td>
+                                    <td>{{ user.username }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Email:</strong></td>
+                                    <td>{{ user.email }}</td>
+                                </tr>
+                                <td>
+                                   <strong>Last Logged:</strong>
+                                </td>
+                                <td>
+                                    {{ user.last_login }}
+                                </td>
+                            </table>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Close
+                            </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

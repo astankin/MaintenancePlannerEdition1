@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% block content %}
+    {% if not has_permission %}
+        <div class="alert alert-danger text-center" role="alert">
+            <h4>You are not allowed to edit this report.</h4>
+        </div>
+    {% else %}
+        <div class="row justify-content-center">
+            <div class="col-7">
+                <div class="card bg-light mb-3" style="max-width: 200rem;">
+                    <div class="card-header">
+                        <i class="fa-solid fa-wrench la-lg me-2"></i>Service Report: {{ object.equipment }}
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="POST">
+                            {% csrf_token %}
+
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-primary">Update</button>
+                            <a href="{% url 'home-page' %}" class="btn btn-secondary">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

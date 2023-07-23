@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block content %}
+    <article>
+        {% if tasks %}
+            <div class="card bg-light ms-1 me-4 mb-4 mt-0">
+                <div class="card-header">
+                    <i class="fa-solid fa-clipboard-list fa-lg me-2"></i>
+                    {% if count > 0 %}
+                        <span class="text-danger">
+                            <strong>You have {{ count }} uncompleted task{{ count|pluralize:'s' }}</strong>
+                        </span>
+                    {% else %}
+                        <span class="text-success">
+                            <strong>You don't have any uncompleted task</strong>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">Equipment</th>
+                                <th scope="col">Task Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Created on</th>
+                                <th scope="col">Actions</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for task in  tasks %}
+                                <tr>
+                                    <td>
+                                        {{ task.equipment }}
+
+                                    </td>
+                                    <td>
+                                        <a class="link-primary" href="{% url 'user-update-task' task.id %}">
+                                            {{ task.title }}
+                                        </a>
+                                    </td>
+                                    <td>{{ task.description|truncatechars:50 }}</td>
+
+                                    <td>{{ task.created_on }}</td>
+                                    <td>
+                                        {% if not task.complete %}
+                                            <a class="btn btn-success" href="{% url 'complete-task' task.id %}">
+                                            Complete
+                                        </a>
+                                        {% endif %}
+                                    </td>
+                                    <td>{% if task.complete %}
+                                        <span class="text-success fw-bold">Completed</span>
+                                    {% else %}
+                                        <span class="text-danger fw-bold">Uncompleted</span>
+                                    {% endif %}</td>
+                                    <td>
+                                        {% if task.complete %}
+                                            <i class="fa-regular fa-circle-check fa-lg fw-bold text-success"></i>
+                                        {% else %}
+                                            <i class="fa-solid fa-circle-xmark fa-lg fw-bold text-danger"></i>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    </p>
+                </div>
+            </div>
+        {% else %}
+            <!-- If no any task in the record -->
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <h5 class="alert alert-primary ms-4 me-4">There is no task assigned to you </h5>
+                </div>
+            </div>
+        {% endif %}
+    </article>
+{% endblock %}

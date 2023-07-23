@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-12 ">
+            {% if number %}
+                {% include 'partials/equipment.html' %}
+            {% else %}
+                <div class="text-center">
+                    <h5 class="alert alert-danger m-4">Please fill in the search field!</h5>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

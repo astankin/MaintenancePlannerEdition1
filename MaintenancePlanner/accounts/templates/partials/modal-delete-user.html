@@ -1,0 +1,32 @@
+<div class="modal" id="myModal2{{ user.id }}" tabindex="-1"
+     aria-labelledby="myModalLabel2" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fa-solid fa-trash-can fa-lg me-2"></i>
+                <h5 class="modal-title"> Delete User</h5>
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>You have selected to delete User:</p>
+                <p><strong>Username:</strong> @{{ user.username }}</p>
+                <p><strong>Name:</strong> {{ user.full_name }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success"
+                        data-bs-dismiss="modal">Close
+                </button>
+                <form action="{% url 'delete-user' user.id %}"
+                      method="post">
+                    {% csrf_token %}
+                    <!-- Confirm Button -->
+                    <button class="btn btn-danger" type="submit">Delete
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

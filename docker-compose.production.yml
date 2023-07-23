@@ -1,0 +1,28 @@
+services:
+  web:
+    image: maintenance_planner
+    build: .
+    command: gunicorn --bind=0.0.0.0:8000 maintenance_planner.wsgi:application
+    volumes:
+      - /tm/app-resources/static:/app/static
+    platform: linux/64
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    links:
+      - postgres
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - "5433:5433"
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: postgres
+      POSTGRES_DB: maintenance_planner_db
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+        - ./postgresql:/var/lib/postgresql/data
