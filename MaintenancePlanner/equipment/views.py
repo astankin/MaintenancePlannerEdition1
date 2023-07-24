@@ -1,9 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
+from django_filters.views import FilterView
 
 from MaintenancePlanner.accounts.mixins import AllowedUsersMixin
 
@@ -17,6 +18,13 @@ class EquipmentListView(LoginRequiredMixin, ListView):
     context_object_name = 'equipment'
     template_name = 'equipment_list.html'
     paginate_by = 7
+
+    def get_queryset(self):
+        order_by_param = self.request.GET.get('order_by')
+        default_ordering = 'id'
+        valid_ordering_fields = ['description', 'type', 'acquisition_date', 'acquisition_value', 'year_of_manufacture']
+        ordering = order_by_param if order_by_param in valid_ordering_fields else default_ordering
+        return Equipment.objects.order_by(ordering)
 
 
 @login_required()
@@ -72,4 +80,5 @@ def advanced_search_equipment(request):
         "eq_filter": eq_filter,
         "equipment": equipment,
     }
+
     return render(request, 'advanced-search-equipment.html', context)
