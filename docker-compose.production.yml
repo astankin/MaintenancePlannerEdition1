@@ -1,7 +1,7 @@
 services:
   web:
     image: maintenance_planner
-    build: .
+#    build: .
     command: gunicorn --bind=0.0.0.0:8000 MaintenancePlanner.wsgi:application
     volumes:
       - /tmp/app-resources/static:/app/static
