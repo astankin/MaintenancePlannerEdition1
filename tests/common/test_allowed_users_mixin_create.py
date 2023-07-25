@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.test import TestCase
 
+
 AppUser = get_user_model()
 
 
@@ -103,3 +104,5 @@ class AllowedUsersMixinTest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url,
                          reverse('home-page'))
+
+
