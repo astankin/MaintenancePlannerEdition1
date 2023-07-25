@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
-from django_filters.views import FilterView
+
 
 from MaintenancePlanner.accounts.mixins import AllowedUsersMixin
 

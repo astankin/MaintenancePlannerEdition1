@@ -28,24 +28,24 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 #     }
 # }
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "HOST": os.getenv('DB_HOST'),
-#         "PORT": os.getenv('DB_PORT'),
-#         "NAME": os.getenv('DB_NAME'),
-#         "USER": os.getenv('DB_USER'),
-#         "PASSWORD": os.getenv('DB_PASSWORD'),
-#
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "HOST": os.getenv('DB_HOST'),
+        "PORT": os.getenv('DB_PORT'),
+        "NAME": os.getenv('DB_NAME'),
+        "USER": os.getenv('DB_USER'),
+        "PASSWORD": os.getenv('DB_PASSWORD'),
+
+    }
+}
 
 
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.postgresql",
 #         "NAME": "maintenance_planner_db",
-#         "USER": "postgres",
+#         "USER": "root",
 #         "PASSWORD": "root",
 #         "HOST": "127.0.0.1",
 #         "PORT": "5432",
@@ -64,16 +64,16 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 # }
 
 #RDS : postgres, Astankin, maintenance-planner-db
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "maintenance_planner_db",
-        "USER": "postgres",
-        "PASSWORD": "Astankin",
-        "HOST": "maintenance-planner-db.cjbnw2v97dbw.eu-central-1.rds.amazonaws.com",
-        "PORT": "5432",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "maintenance_planner_db",
+#         "USER": "postgres",
+#         "PASSWORD": "Astankin",
+#         "HOST": "maintenance-planner-db.cjbnw2v97dbw.eu-central-1.rds.amazonaws.com",
+#         "PORT": "5432",
+#     }
+# }
 
 
 # Application definition
