@@ -17,7 +17,7 @@ class EquipmentListView(LoginRequiredMixin, ListView):
     model = Equipment
     context_object_name = 'equipment'
     template_name = 'equipment_list.html'
-    paginate_by = 7
+    paginate_by = 12
 
     def get_queryset(self):
         order_by_param = self.request.GET.get('order_by')
