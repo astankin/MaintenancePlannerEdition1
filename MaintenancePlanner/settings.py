@@ -177,7 +177,7 @@ STATICFILES_DIRS = [
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
-STATIC_ROOT = os.getenv('STATIC_ROOT')
+STATIC_ROOT ='/tmp/MaintenancePlanner/static'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'media/'
