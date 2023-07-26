@@ -2,7 +2,7 @@ services:
   web:
     image: maintenance_planner
 #    build: .
-    command: gunicorn --bind=0.0.0.0:8000 MaintenancePlanner.wsgi:application
+    command: gunicorn --bind=0.0.0.0:8000 MaintenancePlannerEdition1.wsgi:application
     volumes:
       - /tmp/app-resources/static:/app/static
     platform: linux/amd64
@@ -10,6 +10,8 @@ services:
       - "8000:8000"
     env_file:
       - .env
+    depends_on:
+      - postgres
   postgres:
     image: postgres
     restart: always
@@ -29,7 +31,7 @@ services:
       - "81:80"
       - "443:443"
     volumes:
-      - /tmp/for_deploy/static:/home/app/web/staticfiles
+      - /tmp/MaintenancePlannerEdition1/static:/home/app/web/staticfiles
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/logs:/var/log/nginx
       - ./certbot/www:/var/www/certbot/:ro
