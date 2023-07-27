@@ -8,7 +8,7 @@ UserModel = get_user_model()
 
 
 class ServiceHistory(models.Model):
-    created_on = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(default=timezone.now)
     equipment = models.ForeignKey(
         to=Equipment,
         on_delete=models.CASCADE,

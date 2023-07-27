@@ -21,24 +21,24 @@ DEBUG = bool(int(os.getenv('DEBUG')))
 # ALLOWED_HOSTS = []
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "HOST": os.getenv('DB_HOST'),
-        "PORT": os.getenv('DB_PORT'),
-        "NAME": os.getenv('DB_NAME'),
-        "USER": os.getenv('DB_USER'),
-        "PASSWORD": os.getenv('DB_PASSWORD'),
-
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "HOST": os.getenv('DB_HOST'),
+#         "PORT": os.getenv('DB_PORT'),
+#         "NAME": os.getenv('DB_NAME'),
+#         "USER": os.getenv('DB_USER'),
+#         "PASSWORD": os.getenv('DB_PASSWORD'),
+#
+#     }
+# }
 
 
 # DATABASES = {
@@ -63,7 +63,7 @@ DATABASES = {
 #     }
 # }
 
-#RDS : postgres, Astankin, maintenance-planner-db
+# RDS : postgres, Astankin, maintenance-planner-db
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.postgresql",
@@ -79,6 +79,7 @@ DATABASES = {
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -175,9 +176,10 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
-STATIC_ROOT ='/tmp/MaintenancePlanner/static'
+STATIC_ROOT = '/tmp/MaintenancePlanner/static'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'media/'
@@ -197,3 +199,8 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASS')
+
+JAZZMIN_SETTINGS = {
+    "site_header": "Admin Panel",
+    "welcome_sign": "Maintenance Planner Admin Panel",
+}

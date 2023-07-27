@@ -7,6 +7,10 @@ from MaintenancePlanner.task.models import Task
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    pass
+    fields = ['technician', 'equipment', 'title', 'description', 'created_on']
+    list_display = ['technician', 'equipment', 'title', 'complete']
+    list_filter = ['technician', 'equipment', 'technician']
+    ordering = ['technician', 'equipment']
+    search_fields = ['title']
 
 
