@@ -1,8 +1,10 @@
 from django.contrib import admin
 from django.contrib.admin import ModelAdmin
 from django.contrib.auth import get_user_model
+from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
 
+from MaintenancePlanner.accounts.forms import UserRegisterForm
 from MaintenancePlanner.accounts.models import Profile
 
 # Register your models here.
@@ -10,8 +12,14 @@ UserModel = get_user_model()
 
 
 @admin.register(UserModel)
-class UserModelAdmin(ModelAdmin):
-    fields = ['username', 'first_name', 'last_name', 'email', 'role']
+class AppUserAdmin(UserAdmin):
+    add_form = UserRegisterForm
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('username', 'email', 'role', 'password1', 'password2'),
+        }),
+    )
     list_display = ['username', 'first_name', 'last_name', 'role', 'date_joined']
     list_filter = ['username', 'date_joined', 'role']
     ordering = ['date_joined']
