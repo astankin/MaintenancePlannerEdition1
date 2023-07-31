@@ -8,5 +8,5 @@ def home_page(request):
     return render(request, 'common/index.html')
 
 
-def handler404(request, exception):
-    return render(request, '404.html', status=404)
+
+

@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'partials/head.html' %}
+
+<body>
+    <div class="d-flex align-items-center justify-content-center vh-100">
+            <div class="text-center">
+                <h1 class="display-1 fw-bold">400</h1>
+                <p class="fs-3"> Bad request.</p>
+                <p class="lead">
+                    You may have tried the address incorrectly or you may have used outdated link.
+                  </p>
+                <a href="{% url 'home-page' %}" class="btn btn-primary">Go Home</a>
+            </div>
+        </div>
+</body>
