@@ -8,7 +8,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 
 from MaintenancePlanner.accounts.mixins import AllowedUsersMixin
 
-# from MaintenancePlanner.equipment.filters import EquipmentFilter
+from MaintenancePlanner.equipment.filters import EquipmentFilter
 from MaintenancePlanner.equipment.forms import EquipmentForm
 from MaintenancePlanner.equipment.models import Equipment
 
@@ -72,13 +72,13 @@ def search_equipment(request):
         return render(request, 'search-equipment.html', {})
 
 
-# def advanced_search_equipment(request):
-#     equipment = Equipment.objects.all()
-#     eq_filter = EquipmentFilter(request.GET, queryset=equipment)
-#     equipment = eq_filter.qs
-#     context = {
-#         "eq_filter": eq_filter,
-#         "equipment": equipment,
-#     }
-#
-#     return render(request, 'advanced-search-equipment.html', context)
+def advanced_search_equipment(request):
+    equipment = Equipment.objects.all()
+    eq_filter = EquipmentFilter(request.GET, queryset=equipment)
+    equipment = eq_filter.qs
+    context = {
+        "eq_filter": eq_filter,
+        "equipment": equipment,
+    }
+
+    return render(request, 'advanced-search-equipment.html', context)

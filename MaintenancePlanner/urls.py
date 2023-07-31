@@ -14,3 +14,5 @@ urlpatterns = [
     path('task/', include('MaintenancePlanner.task.urls')),
     path('service-history/', include('MaintenancePlanner.service_history.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = 'MaintenancePlanner.common.views.handler404'
