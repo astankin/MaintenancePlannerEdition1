@@ -16,6 +16,7 @@
   height: 100vh;
   z-index: 600;
   overflow: hidden;
+
 }
 
 @media (max-width: 991.98px) {
