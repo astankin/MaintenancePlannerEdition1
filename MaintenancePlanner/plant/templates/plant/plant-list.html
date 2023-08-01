@@ -22,7 +22,9 @@
                             <th scope="col">Departments</th>
                             <th scope="col">Add Department</th>
                             <th scope="col">Cost Center</th>
-                            <th scope="col">Actions</th>
+                            {% if request.user.role == 'MANAGER' %}
+                                <th scope="col">Actions</th>
+                            {% endif %}
                         </tr>
                         </thead>
                         <tbody class="text-center">
@@ -62,6 +64,7 @@
                                     {{ plant.cost_center }}
 
                                 </td>
+                            {% if request.user.role == 'MANAGER' %}
                                 <td>
                                     <a class="btn btn-warning" href="{% url 'update-plant' plant.id %}">
                                         <i class="fa-solid fa-pen-to-square fa-lg"></i>
@@ -77,6 +80,7 @@
                                     <!-- Modal - Delete Equipment -->
                                     {% include 'plant/delete-plant.html' %}
                                 </td>
+                            {% endif %}
                             </tr>
                         {% endfor %}
                         </tbody>

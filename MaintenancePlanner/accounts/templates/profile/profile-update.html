@@ -8,7 +8,7 @@
         <div class="col-5">
             <div class="card bg-light mb-3" style="max-width: 200rem;">
                 <div class="card-header">
-                        <i class="fa-regular fa-address-card fa-lg me-2"></i> Update User
+                        <i class="fa-regular fa-address-card fa-lg me-2"></i> Personal info
                   </div>
                   <div class="card-body">
                       <div>
@@ -19,7 +19,7 @@
                         {{ u_form|crispy }}
                         {{ p_form|crispy }}
                         <div class="mb-3">
-                            <button type="submit" class="btn btn-primary ">Update</button>
+                            <button type="submit" class="btn btn-primary ">Update Profile</button>
                             <a href="{% url 'profile' %}" class="btn btn-secondary">Cancel</a>
                         </div>
                     </form>

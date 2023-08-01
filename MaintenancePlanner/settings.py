@@ -223,4 +223,7 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASS')
 JAZZMIN_SETTINGS = {
     "site_header": "Admin Panel",
     "welcome_sign": "Maintenance Planner Admin Panel",
+    "site_title": "Admin",
+    "site_brand": "MP Admin",
+    "site_logo": "../static/img/logo.png",
 }
