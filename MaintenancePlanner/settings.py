@@ -21,12 +21,12 @@ DEBUG = True
 # ALLOWED_HOSTS = []
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 # DATABASES = {
 #     "default": {
@@ -64,16 +64,16 @@ DATABASES = {
 # }
 
 # RDS : postgres, Astankin, maintenance-planner-db
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "maintenance_planner_db",
-#         "USER": "postgres",
-#         "PASSWORD": "Astankin",
-#         "HOST": "maintenance-planner-db.cjbnw2v97dbw.eu-central-1.rds.amazonaws.com",
-#         "PORT": "5432",
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "maintenance_planner_db",
+        "USER": "postgres",
+        "PASSWORD": "Astankin",
+        "HOST": "maintenance-planner-db.cjbnw2v97dbw.eu-central-1.rds.amazonaws.com",
+        "PORT": "5432",
+    }
+}
 
 
 # Application definition
