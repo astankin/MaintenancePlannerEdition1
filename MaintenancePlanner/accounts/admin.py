@@ -7,7 +7,7 @@ from django.contrib.auth.models import Group
 from MaintenancePlanner.accounts.forms import UserRegisterForm
 from MaintenancePlanner.accounts.models import Profile
 
-# Register your models here.
+
 UserModel = get_user_model()
 
 
@@ -35,4 +35,4 @@ class ProfileModelAdmin(ModelAdmin):
     search_fields = ['user']
 
 
-admin.site.unregister(Group)
+# admin.site.unregister(Group)
