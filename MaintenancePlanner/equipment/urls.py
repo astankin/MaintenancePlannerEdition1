@@ -9,6 +9,6 @@ urlpatterns = [
     path('create/', CreateEquipment.as_view(), name='create-equipment'),
     path('<int:pk>/edit/', UpdateEquipment.as_view(), name='edit-equipment'),
     path('<int:pk>/delete/', DeleteEquipment.as_view(), name='delete-equipment'),
-    # path('advanced-search/', views.advanced_search_equipment, name='advanced-search-equipment'),
+    path('advanced-search/', views.advanced_search_equipment, name='advanced-search-equipment'),
     path('search/', views.search_equipment, name='search-equipment'),
 ]
