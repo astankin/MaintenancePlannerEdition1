@@ -35,4 +35,3 @@ class ProfileModelAdmin(ModelAdmin):
     search_fields = ['user']
 
 
-# admin.site.unregister(Group)

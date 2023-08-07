@@ -13,7 +13,7 @@ class Task(models.Model):
         on_delete=models.CASCADE,
     )
     title = models.CharField(
-        max_length=256,
+        max_length=100,
     )
     description = models.TextField(null=True, blank=True)
     complete = models.BooleanField(default=False)
