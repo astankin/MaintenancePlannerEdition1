@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import Http404, request
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView
@@ -36,6 +37,16 @@ class ReportDetailView(LoginRequiredMixin, DetailView):
     template_name = 'service-history.html'
 
 
+# class ReportEditView(LoginRequiredMixin, UpdateView):
+#     model = ServiceHistory
+#     template_name = 'edit-report.html'
+#     form_class = ServiceHistoryUpdateForm
+#
+#     def get_success_url(self):
+#         equipment_id = self.object.equipment.id
+#         return reverse_lazy('service-history', kwargs={'pk': equipment_id})
+
+
 class ReportEditView(LoginRequiredMixin, UpdateView):
     model = ServiceHistory
     template_name = 'edit-report.html'
@@ -44,3 +55,10 @@ class ReportEditView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         equipment_id = self.object.equipment.id
         return reverse_lazy('service-history', kwargs={'pk': equipment_id})
+
+    def get(self, request, *args, **kwargs):
+        report = self.get_object()
+        if report.technician != self.request.user:
+            return render(request, 'no-permission.html',)
+
+        return super().get(request, *args, **kwargs)
