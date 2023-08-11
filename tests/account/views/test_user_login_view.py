@@ -14,7 +14,7 @@ AppUser = get_user_model()
 class LoginUserViewTest(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
-        self.user = create_user()
+        self.user = create_user('MANAGER')
 
     def test_authenticated_user_redirect(self):
         request = self.factory.get('/login/')

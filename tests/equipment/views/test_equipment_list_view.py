@@ -8,7 +8,7 @@ class EquipmentListViewTest(TestCase):
     def setUp(self):
         self.plant = create_plant()
         self.department = create_department()
-        self.user = create_user()
+        self.user = create_user('MANAGER')
 
     def test_login_user_username_to_be_correct(self):
         credentials = {
