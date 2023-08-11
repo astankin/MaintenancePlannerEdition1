@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import DetailView, ListView, UpdateView, DeleteView, CreateView
+from django.views.generic import DetailView, ListView, UpdateView, DeleteView, CreateView, TemplateView
 
 from MaintenancePlanner.accounts.decorators import allowed_users
 from MaintenancePlanner.accounts.mixins import AllowedUsersMixin
@@ -37,7 +37,7 @@ class CreateMPView(LoginRequiredMixin, AllowedUsersMixin, CreateView):
     model = MaintenancePlanModel
     form_class = MaintenancePlanForm
     template_name = 'mp/create-mp.html'
-    success_url = '/'
+    success_url = reverse_lazy('mp-created-success')
 
 
 @login_required
@@ -104,3 +104,7 @@ def delete_operation(request, pk):
     if request.method == 'POST':
         operation.delete()
         return redirect(reverse('mp-details', kwargs={'pk': mp.id}))
+
+
+class MPCreateSuccessView(TemplateView):
+    template_name = 'mp/mp-created-message.html'

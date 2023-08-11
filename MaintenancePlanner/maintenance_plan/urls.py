@@ -1,7 +1,8 @@
 from django.urls import path
 
 from MaintenancePlanner.maintenance_plan import views
-from MaintenancePlanner.maintenance_plan.views import OperationDetail, UpdateOperation, DeleteMP, CreateMPView
+from MaintenancePlanner.maintenance_plan.views import OperationDetail, UpdateOperation, DeleteMP, CreateMPView, \
+    MPCreateSuccessView
 
 urlpatterns = [
     path('create/<int:pk>/', views.create_mp, name='create-mp'),
@@ -11,7 +12,7 @@ urlpatterns = [
     path('operation-details/<int:pk>/', OperationDetail.as_view(), name='operation-details'),
     path('operation-update/<int:pk>/', UpdateOperation.as_view(), name='operation-update'),
     path('operation-delete/<int:pk>/', views.delete_operation, name='delete-operation'),
-    # path('list/', ListMp.as_view(), name='mp-list'),
+    path('mp/created/success/', MPCreateSuccessView.as_view(), name='mp-created-success'),
     path('createMP/', CreateMPView.as_view(), name='create-maintenance-plan'),
 
 ]
